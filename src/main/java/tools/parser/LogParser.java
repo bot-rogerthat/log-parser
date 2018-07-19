@@ -4,6 +4,9 @@ package tools.parser;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +20,7 @@ public class LogParser {
 
 	public void parse(Map<String, String> args) {
 		String fileName = args.get(CliParser.PATH);
-		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+		try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName), StandardCharsets.UTF_8)) {
 			String currentLine;
 			StringBuilder sb = new StringBuilder();
 			while ((currentLine = br.readLine()) != null) {
